@@ -102,7 +102,10 @@
 
         static function deleteAll()
         {
+            //delete stores
             $GLOBALS['DB']->exec("DELETE FROM stores *;");
+            //delete all associations with brands
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores *;");
         }
 
         static function findById($search_id)
