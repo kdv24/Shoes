@@ -35,6 +35,23 @@
               </form>
             </div>
           </div>
+
+
+          {% if store_array is not empty %}
+            {% for store in store_array %}
+              <div class="store">
+                <p>
+                  <a href="/stores/{{ store.getId() }}">{{ store.getName() }}</a>
+                </p>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="store">
+              <p>
+                No stores available.
+              </p>
+            </div>
+          {% endif %}
         </div>
 
         <div class="six columns">

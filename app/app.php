@@ -13,8 +13,24 @@
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
+
+    //HOMEPAGE ROUTES
     $app->get('/', function() use ($app) {
         return $app['twig']->render('homepage.twig');
+    });
+
+
+    //SINGLE STORE ROUTES
+    $app->get('/stores', function() use ($app) {
+        return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
+    });
+
+    $app->post('/stores', function() use ($app) {
+        $name = $_POST['add_store'];
+        $new_store = new Store($name);
+        $new_store->save();
+
+        return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
     });
 
 
