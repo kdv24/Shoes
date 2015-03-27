@@ -20,6 +20,18 @@
             Brand::deleteAll();
         }
 
+        function test_findByName()
+        {
+            //arrange
+            $test_brand = new Brand("Good Runs Shoeing Wares");
+            $test_brand->save();
+            //act
+            $result = Brand::findByName("Good");
+
+            //assert
+            $this->assertEquals([$test_brand], $result);
+        }
+
         function test_findById()
         {
             //arrange

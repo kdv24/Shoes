@@ -82,6 +82,21 @@
             }
             return $found_brand;
         }
+
+        static function findByName($search_name)
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM brands WHERE name LIKE '%{$search_name}%';");
+            $brand_rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $brands = array();
+            foreach($brand_rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                array_push($brands, new Brand($name, $id));
+            }
+            return $brands;
+        }
     }
 
  ?>
