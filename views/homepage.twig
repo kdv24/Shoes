@@ -52,7 +52,7 @@
           {% else %}
             <div class="store">
               <p>
-                No stores available.
+                No stores have been added.
               </p>
             </div>
           {% endif %}
@@ -85,10 +85,16 @@
               {% for brand in brand_array %}
                 <div class="brand">
                   <p>
-                    <a href="/brand/{{ brand.getId() }}">{{ brand.getName() }}</a>
+                    <a href="/brands/{{ brand.getId() }}">{{ brand.getName() }}</a>
                   </p>
                 </div>
               {% endfor %}
+            {% else %}
+              <div class="brand">
+                <p>
+                  No brands have been added.
+                </p>
+              </div>
             {% endif %}
 
           </div>
