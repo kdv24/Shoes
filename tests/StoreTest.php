@@ -14,6 +14,19 @@
             Store::deleteAll();
         }
 
+        function test_findById()
+        {
+            //arrange
+            $test_store = new Store("Raymond Discount Shoe Surplus");
+            $test_store->save();
+
+            //act
+            $result = Store::findById($test_store->getId());
+
+            //assert
+            $this->assertEquals($test_store, $result);
+        }
+
         function test_save()
         {
             //arrange

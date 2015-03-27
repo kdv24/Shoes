@@ -42,6 +42,8 @@
             $this->setId($id_row['id']);
         }
 
+
+
         static function getAll()
         {
             $statement = $GLOBALS['DB']->query("SELECT * FROM stores;");
@@ -61,6 +63,22 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM stores *;");
+        }
+
+        static function findById($search_id)
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM stores WHERE id = {$search_id};");
+            //still fetching all columns, even with just one row
+            $id_row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $found_store = null;
+            foreach($id_row as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                $found_store = new Store($name, $id);
+            }
+            return $found_store;
         }
     }
 
