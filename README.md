@@ -34,6 +34,7 @@ CREATE TABLE brands (id serial PRIMARY KEY, name varchar);
 CREATE TABLE stores (id serial PRIMARY KEY, name varchar);
 CREATE TABLE brands_stores (id serial PRIMARY KEY, brand_id int, store_id int);
 CREATE DATABASE shoe_test WITH TEMPLATE shoe_db;
+<<<<<<< HEAD
 ```
 
 #### Technology Used
