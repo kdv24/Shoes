@@ -38,6 +38,14 @@
             return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
         });
 
+        //single store deletion
+        $app->delete('/stores', function() use ($app) {
+            $store = Store::findById($_POST['delete_store']);
+            $store->delete();
+
+            return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
+        });
+
         //brands
         $app->get('/brands', function() use ($app) {
 
@@ -64,6 +72,13 @@
         $store = Store::findById($id);
         $brand = Brand::findById($_POST['store_brand']);
         $store->addBrand($brand);
+
+        return $app['twig']->render('store.twig', array('store' => $store, 'brand_array' => $store->getBrands(), 'all_brands' => Brand::getAll()));
+    });
+
+    $app->patch('/stores/{id}', function($id) use ($app) {
+        $store = Store::findById($id);
+        $store->update($_POST['edit_store']);
 
         return $app['twig']->render('store.twig', array('store' => $store, 'brand_array' => $store->getBrands(), 'all_brands' => Brand::getAll()));
     });
