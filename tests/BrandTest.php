@@ -15,6 +15,26 @@
 
     class BrandTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Brand::deleteAll();
+        }
+
+        function test_deleteAll()
+        {
+            //arrange
+            $test_brand = new Brand("Reebok");
+            $test_brand2 = new Brand("Nike");
+
+            //act
+            $test_brand->save();
+            $test_brand2->save();
+            Brand::deleteAll();
+            $result = Brand::getAll();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
 
         function test_save()
         {
