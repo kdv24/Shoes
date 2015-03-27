@@ -21,6 +21,25 @@
             Store::deleteAll();
         }
 
+        function test_getOtherStores()
+        {
+            //arrange
+            $test_brand = new Brand("Adias");
+            $test_brand->save();
+
+            $test_store = new Store("Happy Hal Shoes");
+            $test_store->save();
+            $test_store2 = new Store("Sammy Shoes");
+            $test_store2->save();
+
+            //act
+            $test_brand->addStore($test_store);
+            $result = $test_brand->getOtherStores();
+
+            //assert
+            $this->assertEquals([$test_store], $result);
+        }
+
         function test_addStore()
         {
             //arrange

@@ -78,6 +78,26 @@
             return $stores;
         }
 
+        function getOtherStores()
+        {
+            //use join statement to get the stores we DON'T yet have joined
+            $statement = $GLOBALS['DB']->query("SELECT stores.* FROM brands
+                JOIN brands_stores ON (brands.id = brands_stores.brand_id)
+                JOIN stores ON(stores.id = brands_stores.store_id)
+                WHERE brands.id != {$this->getId()};");
+            
+            $store_rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $stores = array();
+            foreach($store_rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                array_push($stores, new Store($name, $id));
+            }
+            return $stores;
+        }
+
 
         //STATIC FUNCTIONS
         static function getAll()
