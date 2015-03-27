@@ -36,7 +36,6 @@
             </div>
           </div>
 
-
           {% if store_array is not empty %}
             {% for store in store_array %}
               <div class="store">
@@ -71,6 +70,20 @@
                 <button class="button-primary" type="submit">Add</button>
               </form>
             </div>
+
+            {% if brand_array is not empty %}
+
+              {% for brand in brand_array %}
+
+                <div class="brand">
+                  <p>
+                    <a href="/brand/{{ brand.getId() }}">{{ brand.getName() }}</a>
+                  </p>
+                </div>
+
+              {% endfor %}
+
+            {% endif %}
 
           </div>
         </div>
