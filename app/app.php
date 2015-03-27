@@ -23,6 +23,18 @@
         return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
     });
 
+    $app->delete('/', function() use ($app) {
+
+        if(!empty($_POST['stores'])) {
+            Store::deleteAll();
+        }
+        else {
+            Brand::deleteAll();
+        }
+
+        return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
+    });
+
         //stores
         $app->get('/stores', function() use ($app) {
 
