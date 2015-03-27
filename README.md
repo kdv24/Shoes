@@ -15,7 +15,7 @@ The Shoe Brands project lets a user create multiple shoe stores and brands and c
 2. Import the SQL database into postgres by following along under the *Database* section
 3. Navigate to the web folder inside the project directory
 4. Start a php server from the terminal (`php -S localhost:8000`)
-5. Load localhost:8000 in your browser
+5. Connect to `localhost:8000` in your browser
 
 #### Database
 
@@ -27,7 +27,15 @@ The Shoe Brands project lets a user create multiple shoe stores and brands and c
 
 If the import command fails, create the database manually with the following commands:
 
+#### Technology Used
 
+* PHP/HTML
+* PostgreSQL
+* Test Driven Development
+* PHPUnit
+* Silex
+* Twig
+* CSS
 
 #### License
 
