@@ -14,6 +14,20 @@
             Store::deleteAll();
         }
 
+        function test_delete()
+        {
+            //arrange
+            $test_store = new Store("Shurley Fine Shoes");
+            $test_store->save();
+
+            //act
+            $test_store->delete();
+            $result = Store::getAll();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
         function test_update_database()
         {
             //arrange
