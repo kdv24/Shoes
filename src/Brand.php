@@ -33,6 +33,18 @@
             $this->name = $new_name;
         }
 
+        //DATABASE FUNCTIONS
+        function save()
+        {
+
+        }
+
+
+        //STATIC FUNCTIONS
+        static function getAll()
+        {
+            
+        }
     }
 
  ?>
