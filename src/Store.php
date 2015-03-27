@@ -52,6 +52,35 @@
         {
             //not returning anything so use exec
             $GLOBALS['DB']->exec("DELETE FROM stores * WHERE id = {$this->getId()};");
+
+            //when we delete a store, also delete it's brands in the join table
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores * WHERE store_id = {$this->getId()};");
+        }
+
+        function addBrand($brand)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ('{$brand->getId()}', '{$this->getId()}');");
+        }
+
+        function getBrands()
+        {
+            //get our brands for this specific store using join statements
+            $statement = $GLOBALS['DB']->query("SELECT brands.* FROM stores
+                JOIN brands_stores ON (stores.id = brands_stores.store_id)
+                JOIN brands ON (brands.id = brands_stores.brand_id)
+                WHERE stores.id = {$this->getId()};");
+
+            //turn our rows into an associative array
+            $brand_rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $brands = array();
+            foreach($brand_rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                array_push($brands, new Brand($name, $id));
+            }
+            return $brands;
         }
 
         //STATIC CLASS FUNCTIONS

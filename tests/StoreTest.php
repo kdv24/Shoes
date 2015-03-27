@@ -12,6 +12,27 @@
         protected function tearDown()
         {
             Store::deleteAll();
+            Brand::deleteAll();
+        }
+
+        function test_addBrand()
+        {
+            //arrange
+            $test_store = new Store("Rick Riders Shoes");
+            $test_store->save();
+
+            $test_brand = new Brand("Nike");
+            $test_brand->save();
+            $test_brand2 = new Brand("Reebok");
+            $test_brand2->save();
+
+            //act
+            $test_store->addBrand($test_brand);
+            $test_store->addBrand($test_brand2);
+            $result = $test_store->getBrands();
+
+            //assert
+            $this->assertEquals([$test_brand, $test_brand2], $result);
         }
 
         function test_delete()
