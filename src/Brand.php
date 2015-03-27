@@ -41,6 +41,36 @@
             $this->setId($id_row['id']);
         }
 
+        function delete()
+        {
+            // $GLOBALS['DB']->exec("DELETE FROM brands_stores * WHERE brand_id = {$this->getId()};");
+        }
+
+        function addStore($store)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$this->getId()}, {$store->getId()});");
+        }
+
+        function getStores()
+        {
+            //use a join statement to get all the stores associated with this brand
+            $statement = $GLOBALS['DB']->query("SELECT stores.* FROM brands
+                JOIN brands_stores ON (brands.id = brands_stores.brand_id)
+                JOIN stores ON(stores.id = brands_stores.store_id)
+                WHERE brands.id = {$this->getId()};");
+
+            $store_rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $stores = array();
+            foreach($store_rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                array_push($stores, new Store($name, $id));
+            }
+            return $stores;
+        }
+
 
         //STATIC FUNCTIONS
         static function getAll()
@@ -61,7 +91,10 @@
 
         static function deleteAll()
         {
+            //delete all brands
             $GLOBALS['DB']->exec("DELETE FROM brands *;");
+            //delete all store associations
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores *;");
         }
 
         static function findById($search_id)
