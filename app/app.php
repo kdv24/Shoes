@@ -11,12 +11,16 @@
 
     $app = new Silex\Application();
 
+    $app['debug'] = true;
+
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     //HOMEPAGE ROUTES
     $app->get('/', function() use ($app) {
-        return $app['twig']->render('homepage.twig');
+        return $app['twig']->render('homepage.twig', array('store_array' => Store::getAll(), 'brand_array' => Brand::getAll()));
     });
 
         //stores
@@ -50,8 +54,19 @@
         });
 
     //SINGLE STORE ROUTES
+    $app->get('/stores/{id}', function($id) use ($app) {
+        $store = Store::findById($id);
 
+        return $app['twig']->render('store.twig', array('store' => $store, 'brand_array' => $store->getBrands(), 'all_brands' => Brand::getAll()));
+    });
 
+    $app->post('/stores/{id}', function($id) use ($app) {
+        $store = Store::findById($id);
+        $brand = Brand::findById($_POST['store_brand']);
+        $store->addBrand($brand);
+
+        return $app['twig']->render('store.twig', array('store' => $store, 'brand_array' => $store->getBrands(), 'all_brands' => Brand::getAll()));
+    });
 
     return $app;
  ?>

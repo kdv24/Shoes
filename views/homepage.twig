@@ -23,7 +23,7 @@
             </div>
 
             <div class="six columns">
-                <a class="button" href="/stores">View</a>
+                <a class="button button-caution" href="/stores">DELETE</a>
             </div>
 
             <div class="twelve columns">
@@ -59,7 +59,7 @@
               <h3>Brands</h3>
             </div>
             <div class="six columns">
-              <a class="button" href="/brands">View</a>
+              <a class="button button-caution" href="/brands">DELETE</a>
             </div>
 
             <div class="twelve columns">
@@ -72,17 +72,13 @@
             </div>
 
             {% if brand_array is not empty %}
-
               {% for brand in brand_array %}
-
                 <div class="brand">
                   <p>
                     <a href="/brand/{{ brand.getId() }}">{{ brand.getName() }}</a>
                   </p>
                 </div>
-
               {% endfor %}
-
             {% endif %}
 
           </div>
