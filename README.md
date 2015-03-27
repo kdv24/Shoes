@@ -27,6 +27,14 @@ The Shoe Brands project lets a user create multiple shoe stores and brands and c
 
 If the import command fails, create the database manually with the following commands:
 
+CREATE DATABASE shoe_db;
+ \c shoe_db
+CREATE TABLE brands (id serial PRIMARY KEY, name varchar);
+CREATE TABLE stores (id serial PRIMARY KEY, name varchar);
+CREATE TABLE brands_stores (id serial PRIMARY KEY, brand_id int, store_id int);
+CREATE DATABASE shoe_test WITH TEMPLATE shoe_db;
+
+
 #### Technology Used
 
 * PHP/HTML
