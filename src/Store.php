@@ -80,6 +80,24 @@
             }
             return $found_store;
         }
+
+        static function findByName($search_name)
+        {
+            //include partial matches
+            $statement = $GLOBALS['DB']->query("SELECT * FROM stores WHERE name LIKE '%{$search_name}%';");
+            //still getting multiple columns use fetchAll, even with > 1 row
+            $id_row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $found_stores = array();
+            foreach($id_row as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                $new_store = new Store($name, $id);
+                array_push($found_stores, $new_store);
+            }
+            return $found_stores;
+        }
     }
 
  ?>

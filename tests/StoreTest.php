@@ -14,6 +14,23 @@
             Store::deleteAll();
         }
 
+        function test_findByName()
+        {
+            //arrange
+            $test_store = new Store("Raymond Discount Shoe Surplus");
+            $test_store->save();
+            $test_store2 = new Store("Shoe Bobs");
+            $test_store2->save();
+            $test_store3 = new Store("Thifty Sneakers");
+            $test_store3->save();
+
+            //act
+            $result = Store::findByName("Shoe");
+
+            //assert
+            $this->assertEquals([$test_store, $test_store2], $result);
+        }
+
         function test_findById()
         {
             //arrange
