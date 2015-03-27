@@ -4,12 +4,13 @@
   <head>
     <link rel="stylesheet" href="/css/normalize.css" media="all">
     <link rel="stylesheet" href="/css/skeleton.css" media="all">
+    <link rel="stylesheet" href="/css/main.css" media="all">
     <title>Shoe Store</title>
   </head>
   <body>
     <div class="container">
-      <div class="row">
         <div class="twelve columns">
+      <div class="row header">
           <h2>Welcome to the Shoe Store Front</h2>
         </div>
       </div>
@@ -27,7 +28,7 @@
                 <input type="hidden" name="_method" value="delete">
                 <input type="hidden" name="stores" value="delete">
 
-                <button type="submit">Clear All</button>
+                <button class="caution" type="submit">Clear All</button>
               </form>
             </div>
 
@@ -41,21 +42,24 @@
             </div>
           </div>
 
-          {% if store_array is not empty %}
-            {% for store in store_array %}
+          <div class="twelve columns">
+            {% if store_array is not empty %}
+              {% for store in store_array %}
+                <div class="store">
+                  <p>
+                    <a href="/stores/{{ store.getId() }}">{{ store.getName() }}</a>
+                  </p>
+                </div>
+              {% endfor %}
+            {% else %}
               <div class="store">
                 <p>
-                  <a href="/stores/{{ store.getId() }}">{{ store.getName() }}</a>
+                  No stores have been added.
                 </p>
               </div>
-            {% endfor %}
-          {% else %}
-            <div class="store">
-              <p>
-                No stores have been added.
-              </p>
-            </div>
-          {% endif %}
+            {% endif %}
+          </div>
+
         </div>
 
         <div class="six columns">
@@ -68,7 +72,7 @@
                 <input type="hidden" name="_method" value="delete">
                 <input type="hidden" name="brands" value="delete">
 
-                <button type="submit">Clear All</button>
+                <button class="caution" type="submit">Clear All</button>
               </form>
             </div>
 
@@ -81,21 +85,23 @@
               </form>
             </div>
 
-            {% if brand_array is not empty %}
-              {% for brand in brand_array %}
+            <div class="twelve columns">
+              {% if brand_array is not empty %}
+                {% for brand in brand_array %}
+                  <div class="brand">
+                    <p>
+                      <a href="/brands/{{ brand.getId() }}">{{ brand.getName() }}</a>
+                    </p>
+                  </div>
+                {% endfor %}
+              {% else %}
                 <div class="brand">
                   <p>
-                    <a href="/brands/{{ brand.getId() }}">{{ brand.getName() }}</a>
+                    No brands have been added.
                   </p>
                 </div>
-              {% endfor %}
-            {% else %}
-              <div class="brand">
-                <p>
-                  No brands have been added.
-                </p>
-              </div>
-            {% endif %}
+              {% endif %}
+            </div>
 
           </div>
         </div>

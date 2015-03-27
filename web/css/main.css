@@ -1,0 +1,60 @@
+
+.store p {
+  font-size: 3rem;
+}
+
+.store a {
+  display: block;
+  padding-left: 15px;
+  color: #989DB8;
+}
+
+.store a:hover {
+  background-color: #eee;
+  text-decoration: none;
+}
+
+.brand p {
+  font-size: 3rem;
+}
+
+.brand a {
+  display: block;
+  padding-left: 15px;
+  color: #C9945B;
+}
+
+.brand a:hover {
+  background-color: #FFDAB3;
+  text-decoration: none;
+}
+
+.soft-underline {
+  border-bottom: 1px solid #eee;
+}
+
+.caution {
+  background-color: #F24141;
+  border-color: #BA2D2D;
+  color: white;
+}
+
+.caution:hover {
+  border-color: #555;
+}
+
+.header {
+  margin-bottom: 30px;
+  padding: 10px;
+  border-bottom: 1px solid #555;
+}
+
+.header-brand {
+  background-color: #FFDAB3;
+  border:none;
+}
+
+.header-store {
+  background-color: #eee;
+  border:none;
+}
