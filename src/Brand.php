@@ -63,6 +63,25 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM brands *;");
         }
+
+        static function findById($search_id)
+        {
+            //save database information to statement
+            $statement = $GLOBALS['DB']->query("SELECT * FROM brands WHERE id = {$search_id};");
+            //id is unique so we only find one row
+            $brand_row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $found_brand = null; //in case no rows match
+            foreach($brand_row as $row)
+            {
+                //grab the only row out of the returned array
+                //and turn the data into our actual found object
+                $id = $row['id'];
+                $name = $row['name'];
+                $found_brand = new Brand($name, $id);
+            }
+            return $found_brand;
+        }
     }
 
  ?>

@@ -20,6 +20,18 @@
             Brand::deleteAll();
         }
 
+        function test_findById()
+        {
+            //arrange
+            $test_brand = new Brand("Sketchers");
+            $test_brand->save();
+            //act
+            $result = Brand::findById($test_brand->getId());
+
+            //assert
+            $this->assertEquals($test_brand, $result);
+        }
+
         function test_deleteAll()
         {
             //arrange
