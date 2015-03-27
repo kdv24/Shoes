@@ -32,6 +32,36 @@
         {
             $this->name = (string) $new_name;
         }
+
+        //DATABASE FUNCTIONS
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO stores (name) VALUES ('{$this->getName()}') RETURNING id;");
+            //only one column, so only use fetch
+            $id_row = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($id_row['id']);
+        }
+
+        static function getAll()
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM stores;");
+            //getting more than one column, use fetchAll
+            $store_rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $stores = array();
+            foreach($store_rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+                array_push($stores, new Store($name, $id));
+            }
+            return $stores;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores *;");
+        }
     }
 
  ?>

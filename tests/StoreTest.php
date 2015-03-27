@@ -7,12 +7,24 @@
 
     require_once 'src/Store.php';
 
-
     class StoreTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
+            Store::deleteAll();
+        }
 
+        function test_save()
+        {
+            //arrange
+            $test_store = new Store("Ryan Shoe");
+
+            //act
+            $test_store->save();
+            $result = Store::getAll();
+
+            //assert
+            $this->assertEquals([$test_store], $result);
         }
 
         function test_setName()
