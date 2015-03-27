@@ -98,6 +98,34 @@
             $this->assertEquals(null, $result);
         }
 
+        function test_update_database()
+        {
+            //arrange
+            $test_brand = new Brand("Smarties");
+            $test_brand->save();
+
+            //act
+            $test_brand->update("Smarties Shoes");
+            $result = Brand::findById($test_brand->getId());
+
+            //assert
+            $this->assertEquals("Smarties Shoes", $result->getName());
+        }
+
+        function test_update()
+        {
+            //arrange
+            $test_brand = new Brand("Smarties");
+            $test_brand->save();
+
+            //act
+            $test_brand->update("Smarties Shoes");
+            $result = $test_brand->getName();
+
+            //assert
+            $this->assertEquals("Smarties Shoes", $result);
+        }
+
         function test_findByName()
         {
             //arrange
