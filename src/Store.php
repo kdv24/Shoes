@@ -42,8 +42,13 @@
             $this->setId($id_row['id']);
         }
 
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
 
-
+        //STATIC CLASS FUNCTIONS
         static function getAll()
         {
             $statement = $GLOBALS['DB']->query("SELECT * FROM stores;");

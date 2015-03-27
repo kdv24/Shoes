@@ -14,6 +14,34 @@
             Store::deleteAll();
         }
 
+        function test_update_database()
+        {
+            //arrange
+            $test_store = new Store("Secret Sneaker");
+            $test_store->save();
+
+            //act
+            $test_store->update("Ninja Sneakers");
+            $result = Store::findById($test_store->getId());
+
+            //assert
+            $this->assertEquals("Ninja Sneakers", $result->getName());
+        }
+
+        function test_update()
+        {
+            //arrange
+            $test_store = new Store("Secret Sneaker");
+            $test_store->save();
+
+            //act
+            $test_store->update("Ninja Sneakers");
+            $result = $test_store->getName();
+
+            //assert
+            $this->assertEquals("Ninja Sneakers", $result);
+        }
+
         function test_findByName()
         {
             //arrange
