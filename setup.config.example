@@ -1,0 +1,13 @@
+<?php
+
+    # Replace the following with your postgres username and password that you created
+    # the shoe_db database with. Then rename the file to setup.config so that it will be
+    # automatically ignored from git commits
+
+    $DB_USER = "postgres"; //replace with your username
+    $DB_PASS = ""; //replace with your password
+
+    # If you are experiencing problems with the Postgres.app, try removing the $DB_USER
+    # and $DB_PASS from the new PDO parameters when you declare your database.
+
+ ?>
