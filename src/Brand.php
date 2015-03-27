@@ -43,7 +43,8 @@
 
         function delete()
         {
-            // $GLOBALS['DB']->exec("DELETE FROM brands_stores * WHERE brand_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands * WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores * WHERE brand_id = {$this->getId()};");
         }
 
         function addStore($store)

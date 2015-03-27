@@ -18,6 +18,7 @@
         protected function tearDown()
         {
             Brand::deleteAll();
+            Store::deleteAll();
         }
 
         function test_addStore()
@@ -38,6 +39,63 @@
 
             //assert
             $this->assertEquals([$test_store, $test_store2], $result);
+        }
+
+        function test_delete_getStores()
+        {
+            //arrange
+            $test_brand = new Brand("Good");
+            $test_brand->save();
+
+            $test_store = new Store("Goodwill");
+            $test_store->save();
+            $test_store2 = new Store("Granite Run Shoes");
+            $test_store2->save();
+
+            $test_brand->addStore($test_store);
+            $test_brand->addStore($test_store2);
+
+            //act
+            $test_brand->delete();
+            $result = $test_brand->getStores();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_delete_getBrands()
+        {
+            //arrange
+            $test_brand = new Brand("Good");
+            $test_brand->save();
+
+            $test_store = new Store("Goodwill");
+            $test_store->save();
+            $test_store2 = new Store("Granite Run Shoes");
+            $test_store2->save();
+
+            $test_brand->addStore($test_store);
+            $test_brand->addStore($test_store2);
+
+            //act
+            $test_brand->delete();
+            $result = $test_store->getBrands();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_delete()
+        {
+            //arrange
+            $test_brand = new Brand("Good");
+            $test_brand->save();
+            //act
+            $test_brand->delete();
+            $result = Brand::findById($test_brand->getId());
+
+            //assert
+            $this->assertEquals(null, $result);
         }
 
         function test_findByName()

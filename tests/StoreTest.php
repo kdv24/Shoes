@@ -35,6 +35,50 @@
             $this->assertEquals([$test_brand, $test_brand2], $result);
         }
 
+        function test_delete_getStores()
+        {
+            //arrange
+            $test_store = new Store("Goodwill");
+            $test_store->save();
+
+            $test_brand = new Brand("Good");
+            $test_brand->save();
+            $test_brand2 = new Brand("Bye");
+            $test_brand2->save();
+
+            $test_store->addBrand($test_brand);
+            $test_store->addBrand($test_brand2);
+
+            //act
+            $test_store->delete();
+            $result = $test_brand->getStores();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_delete_getBrands()
+        {
+            //arrange
+            $test_store = new Store("Goodwill");
+            $test_store->save();
+
+            $test_brand = new Brand("Good");
+            $test_brand->save();
+            $test_brand2 = new Brand("Bye");
+            $test_brand2->save();
+
+            $test_store->addBrand($test_brand);
+            $test_store->addBrand($test_brand2);
+
+            //act
+            $test_store->delete();
+            $result = $test_store->getBrands();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
         function test_delete()
         {
             //arrange
