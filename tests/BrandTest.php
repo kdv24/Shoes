@@ -37,7 +37,7 @@
             $result = $test_brand->getOtherStores();
 
             //assert
-            $this->assertEquals([$test_store], $result);
+            $this->assertEquals([$test_store2], $result);
         }
 
         function test_addStore()

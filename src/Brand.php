@@ -81,15 +81,19 @@
         function getOtherStores()
         {
             //use join statement to get the stores we DON'T yet have joined
-            $statement = $GLOBALS['DB']->query("SELECT stores.* FROM brands
+            $statement = $GLOBALS['DB']->query("SELECT DISTINCT stores.* FROM brands
                 JOIN brands_stores ON (brands.id = brands_stores.brand_id)
                 JOIN stores ON(stores.id = brands_stores.store_id)
-                WHERE brands.id != {$this->getId()};");
-            
+                WHERE stores.id NOT IN
+                (SELECT stores.id FROM stores
+                JOIN brands_stores ON (stores.id = brands_stores.store_id)
+                JOIN brands ON (brands.id = brands_stores.brand_id)
+                WHERE brands.id = {$this->getId()});");
+
             $store_rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             $stores = array();
-            foreach($store_rows as $row)
+            foreach($statement as $row)
             {
                 $id = $row['id'];
                 $name = $row['name'];
